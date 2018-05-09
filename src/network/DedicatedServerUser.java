@@ -8,9 +8,7 @@ import model.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -24,12 +22,9 @@ public class DedicatedServerUser extends Thread{
     private ServerGrid model;
     private LinkedList<DedicatedServerUser> lClients;
     private Server server;
-   // private AddMovementThread addMov;
     private GameController c;
-  //  private Petition p;
-  //  private Petition newPetition;
-  //  private AddMovementThread itThread;
-   // private int color;
+    private boolean stop;
+
     private UpdateClientThread itUpdateThread;
     private User user;
     private String usernamee;
@@ -39,6 +34,7 @@ public class DedicatedServerUser extends Thread{
         this.lClients = clients;
         this.server = server;
         this.c = c;
+        this.stop = false;
        // this.newPetition = new Petition(39);
         int numClinent = clients.size();
         //this.itThread = new AddMovementThread(c, this, model, model.getPosicions(numClinent));
@@ -92,17 +88,25 @@ public class DedicatedServerUser extends Thread{
         try {
             this.doStreamO = new ObjectOutputStream(this.sClient.getOutputStream());
             this.diStreamO = new ObjectInputStream(this.sClient.getInputStream());
-            this.doStreamO.writeObject(this.user);
-            System.out.println("estic escrivint objecte server "+user.getNickname());
+            this.doStreamO.writeObject(new String("hey im there"));
+           // System.out.println("estic escrivint objecte server "+user.getNickname());
 
             while (this.isOn) {
 
-                User user2 = (User)diStreamO.readObject();
-                System.out.println("llegiex al server: "+user2.getNickname());
+                String param = (String)diStreamO.readObject();
+                System.out.println("llegiex desde el server: "+param);
 
-                switch(user2.getNickname()){
+
+
+
+
+                switch(param){
                     case "login":
                         checkLogin();
+                        break;
+
+                    case "sign":
+                        checkSignIn();
                         break;
                 }
                 //newPetition = (Petition) diStreamO.readObject();
@@ -152,23 +156,36 @@ public class DedicatedServerUser extends Thread{
     }
 
     public void checkLogin(){
-
+        boolean isOkay = false;
         try {
             User userLogin = (User)diStreamO.readObject();
             System.out.println("llegiex desde el server: "+userLogin.getNickname());
-
-
-            User isOkay = new User("Ok", " "," ", " ", " ");
-            this.doStreamO.writeObject(isOkay);
-
+            /**
+             * FLALTA FER LA FUNCIO DE REGISTREEEEEEE!!!!!!!!!!!!!!!!!
+             */
+            doStreamO.writeObject(isOkay);
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
 
-
+    public void checkSignIn(){
+        boolean isOkay = true;
+        try {
+            User userSign = (User)diStreamO.readObject();
+            System.out.println("llegiex desde el server: "+userSign.getNickname());
+            /**
+             * FLALTA FER LA FUNCIO DE REGISTREEEEEEE!!!!!!!!!!!!!!!!!
+             */
+            doStreamO.writeObject(isOkay);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
