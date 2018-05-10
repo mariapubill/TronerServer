@@ -2,7 +2,17 @@ package model;
 
 //import org.json.JSONException;
 //import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.util.List;
 
 /**
  *La següent classe s'encarrega de la lectura dels fitxers necessaris("config.json") i de tot els parsejaments de Json
@@ -49,7 +59,7 @@ public class Parser {
      * @throws IOException
      * @throws NullPointerException
      */
-   /* public void readJsonFile() throws IOException, NullPointerException {
+    public void readJsonFile() throws IOException, NullPointerException {
         File file = new File("data\\");
         if (!file.exists()) {
             throw new FileNotFoundException("No se ha encontrado el direcotrio");
@@ -82,7 +92,7 @@ public class Parser {
         }catch (JSONException e){
             throw new JSONException("Sintaxis d'arxiu Erronia");
         }
-    }*/
+    }
 
     /**
      * Getter del port al que se conecta el servidor para acceder a la base de datos
@@ -191,5 +201,47 @@ public class Parser {
     public void setComunicationPort(String comunicationPort) {
         this.comunicationPort = comunicationPort;
     }
+    /*
+    public void hashMD5(User user) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
 
+            md.update(user.getPassword().getBytes());
+            byte[] digest = md.digest();
+            StringBuffer sb = new StringBuffer();
+            for (byte b : digest) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
+            user.setPassword(sb.toString());
+        }catch(Exception exception) {
+            System.out.println("imposible convertir a md5");
+        }
+
+
+    }*/
+    /* Retorna un hash a partir de un tipo y un texto */
+
+    public static String getHash(User user, String hashType) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest
+                    .getInstance(hashType);
+            byte[] array = md.digest(user.getPassword().getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100)
+                        .substring(1, 3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    /* Retorna un hash MD5 a partir de un texto */
+
+    public void hashMD5(User user) {
+       user.setPassword(getHash(user, "MD5"));
+    }
 }
+

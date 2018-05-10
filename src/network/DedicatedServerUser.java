@@ -3,13 +3,13 @@ package network;
 
 import controller.GameController;
 import controller.UpdateClientThread;
-import model.ServerGrid;
-import model.User;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -24,10 +24,12 @@ public class DedicatedServerUser extends Thread{
     private Server server;
     private GameController c;
     private boolean stop;
-
+    private GestorDB gestorDB;
+    private ConectorDB conectorDB;
     private UpdateClientThread itUpdateThread;
     private User user;
     private String usernamee;
+    private Parser parser;
 
     public DedicatedServerUser(Socket sClient, LinkedList<DedicatedServerUser> clients, Server server, GameController c) {
         this.sClient = sClient;
@@ -89,41 +91,47 @@ public class DedicatedServerUser extends Thread{
             this.doStreamO = new ObjectOutputStream(this.sClient.getOutputStream());
             this.diStreamO = new ObjectInputStream(this.sClient.getInputStream());
             this.doStreamO.writeObject(new String("hey im there"));
-           // System.out.println("estic escrivint objecte server "+user.getNickname());
+            parser = new Parser();
+            System.out.println("estic al server");
+            LocalDate localDate = LocalDate.now();
+            parser.readJsonFile();
+            ConectorDB conn = new ConectorDB(parser.getUser(), parser.getPassword(), parser.getDatabase(), parser.getPort(), parser.getDirectionIP());
+            // ConectorDB conn = new ConectorDB(parser.getUser(), parser.getPassword(), parser.getDatabase(), parser.getPort(), parser.getDirectionIP());
+            boolean connected = conn.connect();
+            System.out.println(connected);
+            gestorDB = new GestorDB(conn);
+            if (connected) {
+                // System.out.println("estic escrivint objecte server "+user.getNickname());
 
-            while (this.isOn) {
+                while (this.isOn) {
 
-                String param = (String)diStreamO.readObject();
-                System.out.println("llegiex desde el server: "+param);
-
-
+                    String param = (String) diStreamO.readObject();
+                    System.out.println("llegiex desde el server: " + param);
 
 
+                    switch (param) {
+                        case "login":
+                            checkLogin();
+                            break;
 
-                switch(param){
-                    case "login":
-                        checkLogin();
-                        break;
+                        case "sign":
+                            checkSignIn();
+                            break;
+                    }
+                    //newPetition = (Petition) diStreamO.readObject();
+                    // itThread.setNewGrid(newPetition, color);
+                    this.updateAllClients();
 
-                    case "sign":
-                        checkSignIn();
-                        break;
                 }
-                //newPetition = (Petition) diStreamO.readObject();
-               // itThread.setNewGrid(newPetition, color);
-                this.updateAllClients();
-
             }
-        } catch (IOException var2) {
-            this.stopDedicatedServerUser();
-            this.lClients.remove(this);
-            JOptionPane.showMessageDialog( null, var2.getMessage(), "Error", 0);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+            } catch(IOException var2){
+                this.stopDedicatedServerUser();
+                this.lClients.remove(this);
+                JOptionPane.showMessageDialog(null, var2.getMessage(), "Error", 0);
+            } catch(ClassNotFoundException e){
+                e.printStackTrace();
+            }
     }
-
 
     private ObjectOutputStream getOutChannel() {
         return this.doStreamO;
@@ -160,9 +168,9 @@ public class DedicatedServerUser extends Thread{
         try {
             User userLogin = (User)diStreamO.readObject();
             System.out.println("llegiex desde el server: "+userLogin.getNickname());
-            /**
-             * FLALTA FER LA FUNCIO DE REGISTREEEEEEE!!!!!!!!!!!!!!!!!
-             */
+            System.out.println(userLogin.getPassword());
+            parser.hashMD5(userLogin);
+            isOkay = gestorDB.logIn(userLogin);
             doStreamO.writeObject(isOkay);
 
         } catch (IOException e) {
@@ -173,13 +181,21 @@ public class DedicatedServerUser extends Thread{
     }
 
     public void checkSignIn(){
-        boolean isOkay = true;
+        LocalDate localDate = LocalDate.now();
+        boolean isOkay = false;
         try {
-            User userSign = (User)diStreamO.readObject();
+            User userSign = (User) diStreamO.readObject();
             System.out.println("llegiex desde el server: "+userSign.getNickname());
-            /**
-             * FLALTA FER LA FUNCIO DE REGISTREEEEEEE!!!!!!!!!!!!!!!!!
-             */
+            userSign.setDateAccess(localDate.toString());
+            userSign.setDateRegister(localDate.toString());
+            System.out.println();
+            if(gestorDB.registraUsuari(userSign,parser)){
+                isOkay = true;
+               System.out.println("Registro con exito");
+             }else{
+                System.out.println("Error de registro");
+                  //devuelve un boleano
+              }
             doStreamO.writeObject(isOkay);
         } catch (IOException e) {
             e.printStackTrace();

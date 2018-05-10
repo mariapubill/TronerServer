@@ -3,6 +3,8 @@ package model;
 
 
 
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -29,6 +31,10 @@ public class GestorDB {
         this.conectorDB = conectorDB;
     }
 
+    public void closeConnection() {
+        conectorDB.disconnect();
+    }
+
     /**
      * El següent metode s'encarrega de comprobar si l'usuari existeix o no en la base de dades, si l'usuari existeix
      * retorna false, si l'usuari existeix, retorna true i el guarda.
@@ -36,9 +42,12 @@ public class GestorDB {
      * @param user
      * @return boolean
      */
-    public boolean registraUsuari(User user) {
+    public boolean registraUsuari(User user,Parser parser) {
         if (!userExists(user)) {
+            parser.hashMD5(user);
             conectorDB.insertQuery("INSERT INTO usuari(nickname,password,email,dateRegister,dateAccess) VALUES ('" + user.getNickname() + "','" +
+                    user.getPassword() + "','" + user.getEmail() + "','" + user.getDateRegister() + "','" + user.getDateAccess() + "');");
+            System.out.println("INSERT INTO usuari(nickname,password,email,dateRegister,dateAccess) VALUES ('" + user.getNickname() + "','" +
                     user.getPassword() + "','" + user.getEmail() + "','" + user.getDateRegister() + "','" + user.getDateAccess() + "');");
             return true;
 
@@ -64,6 +73,8 @@ public class GestorDB {
 
                 try {
                     result = result + resultSet.getObject("nickname");
+                    System.out.println("chek");
+                    System.out.println(result+"  dkaadspokfasdkof`pa`sdokfaksòdfkòa");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -79,6 +90,7 @@ public class GestorDB {
 
                     try {
                         result = result + resultSet.getObject("email");
+                        System.out.println(result+" fpoaijsdfpoiasdjfiasdfipasjdifapsdfjia");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -111,8 +123,9 @@ public class GestorDB {
                 while (resultSet.next()) {
 
                     try {
-                        System.out.println(result);
+
                         result = result + resultSet.getObject("password");
+                        System.out.println("Password BBDD: "+result);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -123,7 +136,7 @@ public class GestorDB {
                 return false;
             } else {
                 System.out.println(result);
-                System.out.println(user.getPassword());
+                System.out.println("Password Introducido: "+user.getPassword());
                 if(result.equals(user.getPassword())) {
                     return true;
                 }
