@@ -117,7 +117,7 @@ public class DedicatedServerUser extends Thread{
         } catch (IOException var2) {
             this.stopDedicatedServerUser();
             this.lClients.remove(this);
-            JOptionPane.showMessageDialog((Component) null, var2.getMessage(), "Error", 0);
+            JOptionPane.showMessageDialog( null, var2.getMessage(), "Error", 0);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
