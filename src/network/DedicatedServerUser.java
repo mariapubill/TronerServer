@@ -117,6 +117,24 @@ public class DedicatedServerUser extends Thread{
                         case "sign":
                             checkSignIn();
                             break;
+
+                        case "2game":
+                            System.out.println("estic entrant a game");
+                            if( encua(2)){
+                                sendReady(1);
+                            }else{
+                                sendReady(0);
+                            }
+
+                            break;
+                        case "4game":
+
+
+                            encua(4);
+                            break;
+                        case "Tournament":
+                            encua(5);
+                            break;
                     }
                     //newPetition = (Petition) diStreamO.readObject();
                     // itThread.setNewGrid(newPetition, color);
@@ -131,6 +149,53 @@ public class DedicatedServerUser extends Thread{
             } catch(ClassNotFoundException e){
                 e.printStackTrace();
             }
+    }
+
+    private void sendReady(int ready) {
+
+        try {
+            doStreamO.writeObject(ready);
+            System.out.println("encuat correctament");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("he enviat al client ready"+ready);
+
+    }
+
+    private boolean encua(int type) {
+        switch(type){
+
+            case 2:
+               server.getTwoPlayer().add(this);
+               if(server.getTwoPlayer().size()==2){
+                   return true;
+               }else{
+                   return false;
+               }
+            case 4:
+                server.getFourPlayer().add(this);
+                if(server.getTwoPlayer().size()==4){
+                    return true;
+                }else{
+                    return false;
+                }
+
+            case 5:
+                server.getTournamentPlayer().add(this);
+                if(server.getTwoPlayer().size()==4){
+                    return true;
+                }else{
+                    return false;
+                }
+
+                default:
+                    System.out.println("ha entrat al default del switch");
+                    return false;
+        }
+
     }
 
     private ObjectOutputStream getOutChannel() {
@@ -172,6 +237,7 @@ public class DedicatedServerUser extends Thread{
             parser.hashMD5(userLogin);
             isOkay = gestorDB.logIn(userLogin);
             doStreamO.writeObject(isOkay);
+            System.out.println("despres  e¡denviar isOkey");
 
         } catch (IOException e) {
             e.printStackTrace();

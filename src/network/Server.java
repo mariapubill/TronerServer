@@ -13,6 +13,11 @@ import java.net.Socket;
 import java.util.LinkedList;
 
 public class Server extends Thread{
+    private LinkedList<DedicatedServerUser> twoPlayer;
+    private LinkedList<DedicatedServerUser> fourPlayer;
+    private LinkedList<DedicatedServerUser> TournamentPlayer;
+
+
     private ServerSocket sSocket;
     private ServerSocket sSocketUser;
 
@@ -30,6 +35,30 @@ public class Server extends Thread{
     private GameController controller;
     private ServerGrid model;
     private boolean isOn;
+
+    public LinkedList<DedicatedServerUser> getTwoPlayer() {
+        return twoPlayer;
+    }
+
+    public void setTwoPlayer(LinkedList<DedicatedServerUser> twoPlayer) {
+        this.twoPlayer = twoPlayer;
+    }
+
+    public LinkedList<DedicatedServerUser> getFourPlayer() {
+        return fourPlayer;
+    }
+
+    public void setFourPlayer(LinkedList<DedicatedServerUser> fourPlayer) {
+        this.fourPlayer = fourPlayer;
+    }
+
+    public LinkedList<DedicatedServerUser> getTournamentPlayer() {
+        return TournamentPlayer;
+    }
+
+    public void setTournamentPlayer(LinkedList<DedicatedServerUser> tournamentPlayer) {
+        TournamentPlayer = tournamentPlayer;
+    }
 
     /**
      * Constructor amb paramentres.
@@ -107,5 +136,6 @@ public class Server extends Thread{
     public void actualitzarClients(){
         dServers.get(0).updateAllClients();
     }
+
 
 }
