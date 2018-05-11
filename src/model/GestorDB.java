@@ -138,6 +138,7 @@ public class GestorDB {
                 System.out.println(result);
                 System.out.println("Password Introducido: "+user.getPassword());
                 if(result.equals(user.getPassword())) {
+                    updateLastAccess(user);
                     return true;
                 }
                 return false;
