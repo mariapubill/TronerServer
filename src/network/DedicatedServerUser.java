@@ -107,8 +107,7 @@ public class DedicatedServerUser extends Thread{
 
                     String param = (String) diStreamO.readObject();
                     System.out.println("llegiex desde el server: " + param);
-
-
+                    System.out.println(param);
                     switch (param) {
                         case "login":
                             checkLogin();
@@ -118,7 +117,7 @@ public class DedicatedServerUser extends Thread{
                             checkSignIn();
                             break;
 
-                        case "2game":
+                        case "gameTwo":
                             System.out.println("estic entrant a game");
                             if( encua(2)){
                                 sendReady(1);

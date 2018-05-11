@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class Server extends Thread{
     private LinkedList<DedicatedServerUser> twoPlayer;
     private LinkedList<DedicatedServerUser> fourPlayer;
-    private LinkedList<DedicatedServerUser> TournamentPlayer;
+    private LinkedList<DedicatedServerUser> tournamentPlayer;
 
 
     private ServerSocket sSocket;
@@ -53,11 +53,11 @@ public class Server extends Thread{
     }
 
     public LinkedList<DedicatedServerUser> getTournamentPlayer() {
-        return TournamentPlayer;
+        return tournamentPlayer;
     }
 
     public void setTournamentPlayer(LinkedList<DedicatedServerUser> tournamentPlayer) {
-        TournamentPlayer = tournamentPlayer;
+        tournamentPlayer = tournamentPlayer;
     }
 
     /**
@@ -81,6 +81,9 @@ public class Server extends Thread{
             this.dServers = new LinkedList<DedicatedServer>();
             this.dServersUsers = new LinkedList<DedicatedServerUser>();
 
+            this.twoPlayer = new LinkedList<DedicatedServerUser>();
+            this.fourPlayer = new LinkedList<DedicatedServerUser>();
+            this.tournamentPlayer= new LinkedList<DedicatedServerUser>();
         } catch (IOException e) {
             e.printStackTrace();
         }
