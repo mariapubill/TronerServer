@@ -134,9 +134,7 @@ public class Server extends Thread{
                 //pwClient.startDedicatedServer();
                 pwClient2.startDedicatedServerUser();
 
-                while (!controllerGeneral.isServerEnabled()){ //No llega
 
-                }
                 stopDedicatedServers();
             } catch (IOException e) {
                 System.out.println("liao");
@@ -166,6 +164,11 @@ public class Server extends Thread{
             System.out.println("EUROVISION");
          //   dServersUsers.get(i).stopDedicatedServerUser();
             dServersUsers.get(i).interrupt();
+            try {
+                sSocketUser.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
