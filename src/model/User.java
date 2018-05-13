@@ -1,6 +1,5 @@
 package model;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -9,9 +8,7 @@ import java.util.LinkedList;
  *
  * @version: 12/04/2018
  */
-public class User implements Serializable {
-    private static final long serialVersionUID = 2679916162453832699L;
-
+public class User {
     /**
      * Nickname de l'usuari
      */
@@ -280,5 +277,20 @@ public class User implements Serializable {
     }
 
 
+    public int recountType(int mode) {
+        int puntuacion = 0;
+        for(int i = 0; i< score.size();i++) {
+            switch (mode){
+                case 1:
+                    score.get(i).getType().equals("2xGame");
+                    break;
+                case 2:
+                    score.get(i).getType().equals("4xGame");
+                case 3:
+                    score.get(i).getType().equals("tournament");
+            }
+        }
+        return puntuacion;
+    }
 }
 

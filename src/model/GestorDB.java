@@ -1,12 +1,9 @@
 package model;
 
 
-
-
-
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 /**
@@ -314,10 +311,12 @@ public class GestorDB {
      * El següent métode actualitza l'ultim access de l'usuari que s'ha conectat en la base de dades a partir de la informació
      * de l'usuari que rep com a paràmetre
      *
+     *
      * @param user
      */
     public void updateLastAccess(User user) {
-        conectorDB.updateQuery("UPDATE usuari SET dateAccess = '" + user.getDateAccess() + "' WHERE nickname = '" + user.getNickname() + "';");
+        conectorDB.updateQuery("UPDATE usuari SET dateAccess = '" + LocalDate.now() + "' WHERE nickname = '" + user.getNickname() + "';");
+        System.out.println("UPDATE usuari SET dateAccess = '" + LocalDate.now() + "' WHERE nickname = '" + user.getNickname() + "';");
     }
 
     /**
@@ -353,4 +352,8 @@ public class GestorDB {
         conectorDB.insertQuery("UPDATE usuari SET goRight ='"+user.getGoRight()+"' WHERE nickname = '"+user.getNickname()+"';");
         conectorDB.insertQuery("UPDATE usuari SET goTurbo ='"+user.getGoTurbo()+"' WHERE nickname = '"+user.getNickname()+"';");
     }
+
+ //   public void cleanURL() {
+ //       conectorDB.cleanURL();
+ //   }
 }

@@ -15,7 +15,7 @@ public class AddMovementThread extends Thread {
     private GameController c;
     private Petition newGrid;
     private DedicatedServer server;
-    private boolean     go;
+    private boolean go;
     private int x,y;
     private ServerGrid sg;
     private int color;

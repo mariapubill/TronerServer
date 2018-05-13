@@ -36,7 +36,7 @@ import java.sql.*;
          *base de la url a la que accedeix el programa
          */
         // static String url = "jdbc:mysql://localhost";
-        static String url = "jdbc:mysql://";
+        static String baseUrl = "jdbc:mysql://";
         /**
          * atribut que realitza la conexió amb la base de dades
          */
@@ -45,6 +45,8 @@ import java.sql.*;
          * Atribut que retorna les dades de la recerca a la base de dades a nivell de conexio
          */
         static Statement s;
+
+        static String url;
 
         /**
          * Constructor de la classe que s'encarrega d'inicialitzar el conector a la base de dades
@@ -61,6 +63,7 @@ import java.sql.*;
             ConectorDB.password = pass;
             ConectorDB.db = db;
             ConectorDB.port = port;
+            ConectorDB.url = baseUrl;
             ConectorDB.url += directionIP;
             ConectorDB.url += ":"+port+"/";
             ConectorDB.url += db;
@@ -167,5 +170,8 @@ import java.sql.*;
             }
         }
 
+       // public void cleanURL() {
+       //     this.url = url;
+       // }
     }
 

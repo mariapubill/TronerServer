@@ -7,7 +7,9 @@ import model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.time.LocalDate;
 import java.util.Iterator;
@@ -43,6 +45,7 @@ public class DedicatedServerUser extends Thread{
        // this.color = lClients.size() + 1;
        // itThread.setNewGrid(newPetition, color);
         //muchClients(lClients);
+        System.out.println("PRUEBA 3");
         user = new User("nickame", "password","email","data register", "data acces");
     }
 
@@ -66,6 +69,7 @@ public class DedicatedServerUser extends Thread{
             for (int i = 0; i < 2; i++) {
                 lClients.get(i).getItThread().start();
             }
+
             //itThread.start();
            // this.itUpdateThread = new UpdateClientThread(this);
            // itUpdateThread.start();

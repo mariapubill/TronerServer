@@ -1,13 +1,13 @@
 package network;
 
 
-
+import controller.Controller;
 import controller.GameController;
 import model.Petition;
 import model.ServerGrid;
+import view.MainView;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
@@ -33,6 +33,7 @@ public class Server extends Thread{
 
     // Relacio amb el controlador per notificar les recepcions de missatges
     private GameController controller;
+    private Controller controllerGeneral;
     private ServerGrid model;
     private boolean isOn;
 
@@ -68,15 +69,26 @@ public class Server extends Thread{
 
 
 
-    public Server(GameController controller, ServerGrid model) {
+    public Server(GameController controller, ServerGrid model, MainView mainView, Controller controllerGeneral) {
         try {
+            int foo = 0;
+            String port = mainView.getConfigView().getTextField().getText();
+            System.out.println(port);
+            try {
+                foo = Integer.parseInt(port);
+            }catch (Exception e){
+                foo = -1;
+            }
             this.controller = controller;
+            this.controllerGeneral = controllerGeneral;
             this.isOn = false;
             this.model = model;
-
+            System.out.println(foo);
             // obrim un socket de tipus servidor
-            this.sSocket = new ServerSocket(PORT);
-            this.sSocketUser = new ServerSocket(PORT_USER);
+         //   this.sSocket = new ServerSocket(PORT);//Te lo da el admin
+            this.sSocketUser = new ServerSocket(foo); //Te lo da el fichero
+            this.sSocketUser.setReuseAddress(true);
+
 
             this.dServers = new LinkedList<DedicatedServer>();
             this.dServersUsers = new LinkedList<DedicatedServerUser>();
@@ -84,8 +96,10 @@ public class Server extends Thread{
             this.twoPlayer = new LinkedList<DedicatedServerUser>();
             this.fourPlayer = new LinkedList<DedicatedServerUser>();
             this.tournamentPlayer= new LinkedList<DedicatedServerUser>();
+
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("NO LO HACE");
+          //em.out.println(e.printStackTrace());
         }
     }
 
@@ -101,15 +115,18 @@ public class Server extends Thread{
     public void run()  {
         while (isOn) {
             try {
+                System.out.println("louru");
                 // acceptem peticions de connexio dels clients
                 // BLOQUEJA EXECUCIO DEL THREAD
                 //Socket sClient = sSocket.accept();
-                Socket sClientUser =  sSocketUser.accept();
+                Socket sClientUser =  sSocketUser.accept(); //mirar aqui no hace nada a partir de aqui
+                System.out.println("Cagoendios");
                 // creem un nou servidor dedicat per atendre les
                 // peticions del client
                 //DedicatedServer pwClient = new DedicatedServer(model, sClient, dServers, this, controller);
-                DedicatedServerUser pwClient2 =  new DedicatedServerUser(sClientUser, dServersUsers, this, controller);
 
+                DedicatedServerUser pwClient2 =  new DedicatedServerUser(sClientUser, dServersUsers, this, controller);
+                System.out.println("koapspdokasdokpa");
                 //dServers.add(pwClient);
                 dServersUsers.add(pwClient2);
 
@@ -117,8 +134,12 @@ public class Server extends Thread{
                 //pwClient.startDedicatedServer();
                 pwClient2.startDedicatedServerUser();
 
-                System.out.println("client connectat");
+                while (!controllerGeneral.isServerEnabled()){ //No llega
+
+                }
+                stopDedicatedServers();
             } catch (IOException e) {
+                System.out.println("liao");
                 e.printStackTrace();
             }
         }
@@ -140,5 +161,11 @@ public class Server extends Thread{
         dServers.get(0).updateAllClients();
     }
 
-
+    public void stopDedicatedServers(){
+        for(int i = 0; i <dServersUsers.size();i++){
+            System.out.println("EUROVISION");
+         //   dServersUsers.get(i).stopDedicatedServerUser();
+            dServersUsers.get(i).interrupt();
+        }
+    }
 }

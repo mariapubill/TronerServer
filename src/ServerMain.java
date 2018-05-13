@@ -1,13 +1,23 @@
-
-
-import controller.GameController;
-import model.ServerGrid;
-import network.Server;
+import controller.Controller;
+import model.Parser;
+import view.MainView;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class ServerMain {
     public static void main(String args[]) {
+        Parser parser = new Parser();
+        try {
+            parser.readJsonFile();
+            MainView mainView = new MainView();
+            Controller controller = new Controller(mainView,parser);
+            mainView.registerController(controller);
+            mainView.setVisible(true);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,"Fichero Json incorrecto","Error",JOptionPane.WARNING_MESSAGE);
+        }
+
        /* System.out.println("estic al server");
         LocalDate localDate = LocalDate.now();
         Parser parser = new Parser();
@@ -30,10 +40,10 @@ public class ServerMain {
             conn.disconnect();
         }*/
 
-
+        /*
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                // creem la vista
+                // creem la view
 
                 // creem el model
                 ServerGrid model = new ServerGrid();
@@ -43,12 +53,12 @@ public class ServerMain {
                 GameController c = new GameController(model);
                 Server server = new Server(c, model);
                 server.startService();
-                // fem la vista visible
+                // fem la view visible
 
                 // iniciem el servidor
 
             }
-        });
+        });*/
 
     }
 }
