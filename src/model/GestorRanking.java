@@ -20,12 +20,23 @@ public class GestorRanking {
     public Ranking ordenaRanking() {
         Ranking ranking = new Ranking();
         intercambio(ranking.getUsers2x(), 1);
-      //  llenaRanking(ranking.getUsers2x());
+        llenaRanking(ranking.getUsers2x());
         intercambio(ranking.getUsers4x(), 2);
-  //      llenaRanking(ranking.getUsers4x());
+        llenaRanking(ranking.getUsers4x());
         intercambio(ranking.getUsersTournament(), 3);
 
         return ranking;
+    }
+
+    private void llenaRanking(LinkedList<User> users) {
+        if(users.size()<=10){
+            for(int i = users.size();i< 10; i++){
+                User user= new User();
+                user.setNickname("--");
+                users.add(user);
+            }
+
+        }
     }
 
 

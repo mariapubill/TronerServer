@@ -2,6 +2,7 @@ package model;
 
 //import org.json.JSONException;
 //import org.json.JSONObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,7 +12,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -68,6 +68,7 @@ public class Parser {
         boolean exists = false;
         for (int i = 0; i < ficheros.length; i++) {
             File f = new File(ficheros[i].getName());
+            System.out.println(ficheros[i].getName());
             if (ficheros[i].getName().equals("config.json")) {
                 exists = true;
             }
