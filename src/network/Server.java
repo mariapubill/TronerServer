@@ -135,7 +135,7 @@ public class Server extends Thread{
                 pwClient2.startDedicatedServerUser();
 
 
-                stopDedicatedServers();
+            //    stopDedicatedServers();
             } catch (IOException e) {
                 System.out.println("liao");
                 e.printStackTrace();
@@ -161,14 +161,18 @@ public class Server extends Thread{
 
     public void stopDedicatedServers(){
         for(int i = 0; i <dServersUsers.size();i++){
-            System.out.println("EUROVISION");
+
          //   dServersUsers.get(i).stopDedicatedServerUser();
             dServersUsers.get(i).interrupt();
-            try {
-                sSocketUser.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
+    }
+
+    public void closeSocket() {
+        try{
+            sSocketUser.close();
+        }catch (IOException ioException){
+            
+        }
+
     }
 }

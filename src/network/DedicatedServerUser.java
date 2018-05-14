@@ -241,7 +241,9 @@ public class DedicatedServerUser extends Thread{
             isOkay = gestorDB.logIn(userLogin);
             doStreamO.writeObject(isOkay);
             System.out.println("despres  e¡denviar isOkey");
-
+            if(isOkay){
+                doStreamO.writeObject(userLogin);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

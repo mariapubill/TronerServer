@@ -79,6 +79,7 @@ public class Controller implements ActionListener, KeyListener,FocusListener {
             if(serverEnabled) {
                 serverEnabled = false;
                 gestorDB.closeConnection();
+                server.closeSocket();
                 server.interrupt();
               //  gestorDB.cleanURL();
                 mainView.getMenuView().disableButtons();

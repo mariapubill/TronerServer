@@ -15,6 +15,7 @@ public class MenuView extends JPanel {
     private JButton exit;
 
 
+
     public MenuView(){
         this.setLayout(new GridLayout(6,1));
         connexion = new JButton("Connexio");

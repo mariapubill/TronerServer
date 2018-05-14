@@ -1,5 +1,7 @@
 package model;
 
+
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -8,7 +10,8 @@ import java.util.LinkedList;
  *
  * @version: 12/04/2018
  */
-public class User {
+public class User implements Serializable{
+    private static final long serialVersionUID = 2679916162453832699L;
     /**
      * Nickname de l'usuari
      */
@@ -52,7 +55,7 @@ public class User {
     /**
      * Llista la qual conte tota la informació referent als punts que ha anat guanyant
      */
-    LinkedList<Score> score;
+    private LinkedList<Score> score;
 
     /**
      * Constructor per defecte de la classe user
@@ -275,6 +278,8 @@ public class User {
     public void setGoTurbo(char goTurbo) {
         this.goTurbo = goTurbo;
     }
+
+
 
 
     public int recountType(int mode) {
