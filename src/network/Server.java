@@ -171,7 +171,7 @@ public class Server extends Thread{
         try{
             sSocketUser.close();
         }catch (IOException ioException){
-            
+
         }
 
     }

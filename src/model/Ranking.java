@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 public class Ranking implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private LinkedList<User> users2x;
     private LinkedList<User> users4x;
