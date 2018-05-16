@@ -127,6 +127,7 @@ public class Controller implements ActionListener, KeyListener,FocusListener {
           //  mainView.changePanel(actualLayout.toString());
             ((JButton)e.getSource()).getTopLevelAncestor().requestFocus();
         }
+
         mainView.getGraphicView().getJcbMode().getTopLevelAncestor().requestFocus();
         mainView.getGraphicView().getJcbUsers().getTopLevelAncestor().requestFocus();
 
@@ -171,7 +172,6 @@ public class Controller implements ActionListener, KeyListener,FocusListener {
                 break;
             case 5:
                 if (mainView.showDialog("¿Desea volver a la pantalla de inicio?", actualLayout)) {
-
                     actualLayout = 1;
                     mainView.changePanel(actualLayout.toString());
                 }
@@ -179,6 +179,7 @@ public class Controller implements ActionListener, KeyListener,FocusListener {
             case 7:
                 if (mainView.showDialog("Si abandona la partida sera penalizado.\n¿esta usted seguro de abandonar?", actualLayout)) {
                     actualLayout = 5;
+                    //AQUI HABRIA QUE RESTAR
                     mainView.changePanel(actualLayout.toString());
                 }
             default:
