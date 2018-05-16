@@ -139,6 +139,9 @@ public class DedicatedServerUser extends Thread{
                         case "Tournament":
                             encua(5);
                             break;
+                        case "DisconectUser":
+                            gestorDB.changeConnected(user);
+                            break;
                      //   case "UpdateDatabase":
                       //      gestorDB.changeConnected(user);
 

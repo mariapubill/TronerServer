@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="041ea820-0ccf-48ca-8402-6a15406cec8d" name="Default" comment="">
+    <list default="true" id="041ea820-0ccf-48ca-8402-6a15406cec8d" name="Default" comment="16-05 añadidas varias funcionalidades, ahora el log in te mira si estas conectado o no.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ConectorDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ConectorDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/GestorDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestorDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/GestorRanking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestorRanking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Ranking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ranking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Score.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/network/DedicatedServerUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/DedicatedServerUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainView.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DedicatedServerUser.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DedicatedServerUser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/network/DedicatedServerUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="153" column="36" selection-start-line="153" selection-start-column="36" selection-end-line="153" selection-end-column="36" />
+            <state relative-caret-position="-2003">
+              <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -38,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/src/model/GestorRanking.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="986">
-              <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
+              <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -46,7 +39,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GestorDB.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GestorDB.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/GestorDB.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
@@ -76,23 +69,26 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+            <state relative-caret-position="2557">
+              <caret line="179" column="40" lean-forward="true" selection-start-line="179" selection-start-column="40" selection-end-line="179" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#5509#5510#0" expanded="true" />
+                <element signature="e#5549#5550#0" expanded="true" />
+                <element signature="e#7657#7658#0" expanded="true" />
+                <element signature="e#7693#7694#0" expanded="true" />
+                <element signature="e#7752#7753#0" expanded="true" />
+                <element signature="e#7802#7803#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WindowController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/WindowController.java">
+      <file leaf-file-name="UpdateClientThread.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/UpdateClientThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -160,7 +156,6 @@
         <option value="$PROJECT_DIR$/src/ServerMain.java" />
         <option value="$PROJECT_DIR$/src/model/User.java" />
         <option value="$PROJECT_DIR$/src/view/MenuView.java" />
-        <option value="$PROJECT_DIR$/src/controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/model/Parser.java" />
         <option value="$PROJECT_DIR$/src/model/ConectorDB.java" />
         <option value="$PROJECT_DIR$/data/config.json" />
@@ -169,8 +164,9 @@
         <option value="$PROJECT_DIR$/src/model/GestorRanking.java" />
         <option value="$PROJECT_DIR$/src/view/MainView.java" />
         <option value="$PROJECT_DIR$/src/network/Server.java" />
-        <option value="$PROJECT_DIR$/src/network/DedicatedServerUser.java" />
         <option value="$PROJECT_DIR$/src/model/GestorDB.java" />
+        <option value="$PROJECT_DIR$/src/controller/Controller.java" />
+        <option value="$PROJECT_DIR$/src/network/DedicatedServerUser.java" />
       </list>
     </option>
   </component>
@@ -361,7 +357,21 @@
       <option name="project" value="LOCAL" />
       <updated>1526310473329</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="16-05 añadidas varias funcionalidades, ahora el log in te mira si estas conectado o no.">
+      <created>1526483420853</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1526483420853</updated>
+    </task>
+    <task id="LOCAL-00007" summary="16-05 añadidas varias funcionalidades, ahora el log in te mira si estas conectado o no.">
+      <created>1526489885133</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1526489885133</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -376,7 +386,7 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32943678" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36769393" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
@@ -403,7 +413,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="En aquest comit he anexionat les vistes, encara en queden pendents per aixo. Per altra banda té un problema amb el tema port que s'ha de revisar. &#10;Nota: El numero de port que es posa en conexio es el mateix que s'ha d'introduir en el client per fer la connexio" />
     <MESSAGE value="Comit en el que he arreglado errores" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comit en el que he arreglado errores" />
+    <MESSAGE value="16-05 añadidas varias funcionalidades, ahora el log in te mira si estas conectado o no." />
+    <option name="LAST_COMMIT_MESSAGE" value="16-05 añadidas varias funcionalidades, ahora el log in te mira si estas conectado o no." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -411,37 +422,37 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/GestorRanking.java</url>
-          <line>21</line>
+          <line>20</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/GestorRanking.java</url>
-          <line>22</line>
+          <line>21</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/GestorRanking.java</url>
-          <line>23</line>
+          <line>22</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/GestorRanking.java</url>
-          <line>24</line>
+          <line>23</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/GestorRanking.java</url>
-          <line>25</line>
+          <line>24</line>
           <properties />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/GestorRanking.java</url>
-          <line>26</line>
+          <line>25</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
@@ -461,6 +472,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1615">
           <caret line="101" column="59" selection-start-line="101" selection-start-column="59" selection-end-line="101" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -468,6 +482,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1343">
           <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -475,6 +492,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -636,6 +656,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1343">
           <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -643,6 +666,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -713,6 +739,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -720,6 +749,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
           <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -727,13 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
           <caret line="64" column="34" selection-start-line="64" selection-start-column="34" selection-end-line="64" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/UpdateClientThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -774,7 +799,7 @@
     <entry file="file://$PROJECT_DIR$/src/model/GestorRanking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="986">
-          <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
+          <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -795,27 +820,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/GestorDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="322" column="5" lean-forward="true" selection-start-line="322" selection-start-column="5" selection-end-line="322" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/UpdateClientThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+        <state relative-caret-position="2557">
+          <caret line="179" column="40" lean-forward="true" selection-start-line="179" selection-start-column="40" selection-end-line="179" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5509#5510#0" expanded="true" />
+            <element signature="e#5549#5550#0" expanded="true" />
+            <element signature="e#7657#7658#0" expanded="true" />
+            <element signature="e#7693#7694#0" expanded="true" />
+            <element signature="e#7752#7753#0" expanded="true" />
+            <element signature="e#7802#7803#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/network/DedicatedServerUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="153" column="36" selection-start-line="153" selection-start-column="36" selection-end-line="153" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/GestorDB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="322" column="5" lean-forward="true" selection-start-line="322" selection-start-column="5" selection-end-line="322" selection-end-column="5" />
+        <state relative-caret-position="-2003">
+          <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
         </state>
       </provider>
     </entry>
