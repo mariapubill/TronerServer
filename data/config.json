@@ -2,7 +2,7 @@
    "Port":3306,
    "DirectionIP": "127.0.0.1",
    "Database": "troner_db",
-   "User": "troner",
-   "Password": "1234",
+   "User": "root",
+   "Password": "Laura005",
    "CommunicationPort": "12345"
   }

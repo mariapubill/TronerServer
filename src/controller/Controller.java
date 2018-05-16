@@ -1,15 +1,13 @@
 package controller;
 
 
-import model.ConectorDB;
-import model.GestorDB;
-import model.Parser;
-import model.ServerGrid;
+import model.*;
 import network.Server;
 import view.MainView;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.LinkedList;
 
 public class Controller implements ActionListener, KeyListener,FocusListener {
     private Parser parser;
@@ -123,12 +121,63 @@ public class Controller implements ActionListener, KeyListener,FocusListener {
         }
         if(e.getActionCommand().equals("Elimina")){
             System.out.println("PENDIENTE DELETE");
-         //   actualLayout = 2;
-          //  mainView.changePanel(actualLayout.toString());
+            actualLayout = 5;
+            LinkedList<User> l = gestorDB.selectAllUsers();
+            changeTable(l);
+            mainView.changePanel(actualLayout.toString());
+
             ((JButton)e.getSource()).getTopLevelAncestor().requestFocus();
+        }
+        if(e.getActionCommand().equals("Delete")){
+
+            System.out.println("eliminar");
+            if(mainView.getDeleteView().getTable().getSelectedRow()!= -1) {
+                LinkedList<User> l = gestorDB.selectAllUsers();
+                User user = new User();
+                user.setNickname(l.get(mainView.getDeleteView().getTable().getSelectedRow()).getNickname());
+                mainView.getDeleteView().deleteUser();
+                gestorDB.deleteUser(user);
+                ((JButton) e.getSource()).getTopLevelAncestor().requestFocus();
+            }
+
+
+
+
+        }
+        if(e.getActionCommand().equals("ExitDelete")){
+            actualLayout = 1;
+            mainView.changePanel(actualLayout.toString());
+            ((JButton)e.getSource()).getTopLevelAncestor().requestFocus();
+
+
         }
         mainView.getGraphicView().getJcbMode().getTopLevelAncestor().requestFocus();
         mainView.getGraphicView().getJcbUsers().getTopLevelAncestor().requestFocus();
+
+    }
+
+    private void changeTable(LinkedList<User> l) {
+
+
+       Object [][] data =  new Object[l.size()][7];
+
+       for (int i  = 0 ; i< l.size(); i++){
+           data [i][0] = "Delete";
+           data [i][1] = l.get(i).getNickname();
+           data [i][2] = l.get(i).recountType(1);
+           data [i][3] = l.get(i).recountType(2);
+           data [i][4] = l.get(i).recountType(3);
+           data [i][5] = l.get(i).getDateRegister();
+           data [i][6] = l.get(i).getDateAccess();
+
+       }
+       Object [] title = new Object[]{"", "Nikname", "Points x2", "Points x4", "Tournament", "Register", "Modification"};
+       mainView.getDeleteView().getDm().setDataVector(data,title);
+       mainView.getDeleteView().getTable().getColumn("").setCellRenderer(mainView.getDeleteView().getBrDelte());
+       mainView.getDeleteView().getTable().getColumn("").setCellEditor( mainView.getDeleteView().getBtDelete());
+
+
+
 
     }
 
@@ -177,7 +226,7 @@ public class Controller implements ActionListener, KeyListener,FocusListener {
                 }
                 break;
             case 7:
-                if (mainView.showDialog("Si abandona la partida sera penalizado.\n¿esta usted seguro de abandonar?", actualLayout)) {
+                if (mainView.showDialog("Si abandona la partida sera penalizado./n¿esta usted seguro de abandonar?", actualLayout)) {
                     actualLayout = 5;
                     mainView.changePanel(actualLayout.toString());
                 }

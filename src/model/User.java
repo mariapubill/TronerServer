@@ -72,6 +72,7 @@ public class User implements Serializable{
      * @param dateRegister
      * @param dateAccess
      */
+
     public User(String nickname,String password,String email,String dateRegister,String dateAccess){
         this.nickname = nickname;
         this.password = password;

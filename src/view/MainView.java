@@ -14,6 +14,7 @@ public class MainView extends JFrame {
     private MenuView menuView;
     private GraphicView graphicView;
     private RegisterView registerView;
+    private DeleteView deleteView;
     public MainView(){
         this.setResizable(false);
         this.setFocusable(true);
@@ -26,6 +27,7 @@ public class MainView extends JFrame {
         registerView = new RegisterView();
         layout = new CardLayout();
         menuView = new MenuView();
+        deleteView = new DeleteView();
         configView = new ConfigView();
         graphicView = new GraphicView();
         jPanel = new JPanel();
@@ -35,6 +37,7 @@ public class MainView extends JFrame {
         jPanel.add("2",configView);
         jPanel.add("3", graphicView);
         jPanel.add("4",registerView);
+        jPanel.add("5",deleteView);
 
 
         layout.show(jPanel,"1");
@@ -99,8 +102,13 @@ public class MainView extends JFrame {
         configView.registerConfigController(controller);
         menuView.registerControllerMenu(controller);
         graphicView.registerControllerGraphic(controller);
+        deleteView.registerControllerDeleteView(controller);
         this.addComponentListener(new WindowController(this));
         this.addKeyListener(controller);
+    }
+
+    public DeleteView getDeleteView() {
+        return deleteView;
     }
 
     public ConfigView getConfigView() {
