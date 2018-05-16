@@ -19,7 +19,7 @@ public class MainView extends JFrame {
         this.setFocusable(true);
         this.setTitle("Servidor");
         //Basic settings
-        this.setMinimumSize(new Dimension(800,600));
+        this.setMinimumSize(new Dimension(1000,600));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(1000, 600);
         this.setLocationRelativeTo(null);

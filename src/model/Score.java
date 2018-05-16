@@ -1,13 +1,17 @@
 package model;
 
 
+import java.io.Serializable;
+
 /**
  * La seguent classe conte tota la informacio referent a la puntuacio aconseguida en una ronda en concret aixi com
  * el moment en el que s'ha realitzat i en quin tipus de joc s'ha realitzat.
  *
  * @Version 12/04/2018
  */
-public class Score {
+public class Score implements Serializable {
+
+    private static final long serialVersionUID = 5353979512951232299L;
     /**
      * Data en la que s'ha guanyat la puntuacio
      */

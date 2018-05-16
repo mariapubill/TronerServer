@@ -1,8 +1,8 @@
  {
    "Port":3306,
    "DirectionIP": "127.0.0.1",
-   "Database": "troner",
-   "User": "root",
-   "Password": "",
+   "Database": "troner_db",
+   "User": "troner",
+   "Password": "1234",
    "CommunicationPort": "12345"
   }

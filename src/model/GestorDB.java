@@ -136,11 +136,46 @@ public class GestorDB {
                 System.out.println("Password Introducido: "+user.getPassword());
                 if(result.equals(user.getPassword())) {
                     getUserInfo(user);
-                    return true;
+                    if(isConnected(user.getNickname())){
+                        return false;
+                    }else{
+                        setConnected(user.getNickname());
+                        return true;
+                    }
                 }
                 return false;
             }
         }else{
+            return false;
+        }
+    }
+
+    private void setConnected(String nickname) {
+        conectorDB.insertQuery("UPDATE usuari SET connected ='"+1+"' WHERE nickname = '"+nickname+"';");
+        System.out.println("UPDATE usuari SET connected ='"+1+"' WHERE nickname = '"+nickname+"';");
+    }
+
+    private boolean isConnected(String nickname) {
+        ResultSet resultSet = conectorDB.selectQuery("SELECT usuari.connected FROM usuari WHERE usuari.nickname like '" +
+                nickname + "';");
+        System.out.println("SELECT usuari.connected FROM usuari WHERE usuari.nickname like '" +
+        nickname + "';");
+
+        try {
+            while (resultSet.next()) {
+                Boolean result = (boolean) resultSet.getObject("connected");
+                System.out.println(result);
+                if(result.equals(1)){
+                    return true;
+                }else{
+                    return false;
+                }
+
+            }
+            return false;
+        } catch (SQLException e) {
+            System.out.println("lol");
+            e.printStackTrace();
             return false;
         }
     }
@@ -353,7 +388,12 @@ public class GestorDB {
         conectorDB.insertQuery("UPDATE usuari SET goTurbo ='"+user.getGoTurbo()+"' WHERE nickname = '"+user.getNickname()+"';");
     }
 
- //   public void cleanURL() {
+    public void changeConnected(User user) {
+        conectorDB.updateQuery("UPDATE usuari SET connected = false WHERE nickname ='"+user.getNickname()+"';");
+        System.out.println("UPDATE usuari SET connected = false WHERE nickname ='"+user.getNickname()+"';");
+    }
+
+    //   public void cleanURL() {
  //       conectorDB.cleanURL();
  //   }
 }

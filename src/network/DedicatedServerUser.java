@@ -32,6 +32,7 @@ public class DedicatedServerUser extends Thread{
     private User user;
     private String usernamee;
     private Parser parser;
+    private GestorRanking gestorRanking;
 
     public DedicatedServerUser(Socket sClient, LinkedList<DedicatedServerUser> clients, Server server, GameController c) {
         this.sClient = sClient;
@@ -46,7 +47,7 @@ public class DedicatedServerUser extends Thread{
        // itThread.setNewGrid(newPetition, color);
         //muchClients(lClients);
         System.out.println("PRUEBA 3");
-        user = new User("nickame", "password","email","data register", "data acces");
+       // user = new User("nickame", "password","email","data register", "data acces");
     }
 
     public DedicatedServerUser(String username){
@@ -138,6 +139,9 @@ public class DedicatedServerUser extends Thread{
                         case "Tournament":
                             encua(5);
                             break;
+                     //   case "UpdateDatabase":
+                      //      gestorDB.changeConnected(user);
+
                     }
                     //newPetition = (Petition) diStreamO.readObject();
                     // itThread.setNewGrid(newPetition, color);
@@ -147,8 +151,9 @@ public class DedicatedServerUser extends Thread{
             }
             } catch(IOException var2){
                 this.stopDedicatedServerUser();
+                gestorDB.changeConnected(this.user);
                 this.lClients.remove(this);
-                JOptionPane.showMessageDialog(null, var2.getMessage(), "Error", 0);
+              //  JOptionPane.showMessageDialog(null, var2.getMessage(), "Error", 0);
             } catch(ClassNotFoundException e){
                 e.printStackTrace();
             }
@@ -234,15 +239,20 @@ public class DedicatedServerUser extends Thread{
     public void checkLogin(){
         boolean isOkay = false;
         try {
-            User userLogin = (User)diStreamO.readObject();
-            System.out.println("llegiex desde el server: "+userLogin.getNickname());
-            System.out.println(userLogin.getPassword());
-            parser.hashMD5(userLogin);
-            isOkay = gestorDB.logIn(userLogin);
+            this.user = (User)diStreamO.readObject();
+            System.out.println("llegiex desde el server: "+user.getNickname());
+            System.out.println(user.getPassword());
+            parser.hashMD5(user);
+            isOkay = gestorDB.logIn(user);
+            System.out.println(isOkay);
             doStreamO.writeObject(isOkay);
             System.out.println("despres  e¡denviar isOkey");
             if(isOkay){
-                doStreamO.writeObject(userLogin);
+                System.out.println("ESCRIBE");
+                doStreamO.writeObject(user);
+                gestorRanking = new GestorRanking(gestorDB.selectAllUsers());
+                doStreamO.writeObject(gestorRanking.ordenaRanking());
+                System.out.println("ENVIAU");
             }
         } catch (IOException e) {
             e.printStackTrace();
