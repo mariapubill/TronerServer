@@ -324,9 +324,8 @@ public class GestorDB {
      */
     private void chargePoints(User user) {
         LinkedList<Score> scores = new LinkedList<>();
-        ResultSet resultSet =conectorDB.selectQuery("SELECT s.dateScore,s.points,s.timeRound,g.type FROM game as g,score as s,usuari as u WHERE u.nickname = s.nickname AND s.idGame = g.idGame AND s.nickname like '"+user.getNickname()+"';");
-        System.out.println("SELECT s.datePlay,s.points,s.timeRound,g.type FROM game as g,score as s,usuari as u WHERE u.nickname = s.nickname " +
-                "AND s.idGame = g.idGame AND s.nickname like '"+user.getNickname()+"';");
+
+        ResultSet resultSet =conectorDB.selectQuery("SELECT s.dateScore,s.points,s.timeRound,g.type FROM game as g,score as s,usuari as u WHERE u.nickname = s.nickname AND s.idGame = g.idGame AND s.nickname like '"+user.getNickname()+"' order by dateScore ASC,timeRound asc;");
         try {
 
             while(resultSet.next()){

@@ -76,7 +76,7 @@ public class GestorRanking {
         }
         }
 
-    private int recount(User user , int mode) {
+    private long recount(User user , int mode) {
         return user.recountType(mode);
     }
 

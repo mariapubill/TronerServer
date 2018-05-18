@@ -1,9 +1,12 @@
 package view;
 
 import controller.Controller;
+import model.Score;
+import model.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class GraphicView extends JPanel{
     //declaració constants
@@ -12,7 +15,9 @@ public class GraphicView extends JPanel{
     //declaració variables
     private JComboBox jcbUsers;
     private JComboBox jcbMode;
-
+    private Grapic gra;
+    private JButton jbExit;
+    private LinkedList<Score> score;
 
     public GraphicView(){
 
@@ -20,7 +25,7 @@ public class GraphicView extends JPanel{
         this.setLayout(new BorderLayout());
 
         JPanel jpDi = new JPanel();
-        jpDi.setLayout(new GridLayout(3,3));
+        jpDi.setLayout(new BorderLayout());
 
 
         JPanel jpFlowLayout = new JPanel();
@@ -38,14 +43,12 @@ public class GraphicView extends JPanel{
         //Creació comboBox (USER i MODE)
 
         jcbUsers = new JComboBox();
-        jcbUsers.addItem("uno");
-        jcbUsers.addItem("dosooooooooooooooo");
-        jcbUsers.addItem("tres");
+
 
         jcbMode = new JComboBox();
-        jcbMode.addItem("uno");
-        jcbMode.addItem("dosooooooooooooooo");
-        jcbMode.addItem("tres");
+        jcbMode.addItem("2 Players");
+        jcbMode.addItem("4 players");
+        jcbMode.addItem("Tournement");
 
         jpFlowLayout.add(jlUsers);
         jpFlowLayout.add(jcbUsers);
@@ -54,24 +57,16 @@ public class GraphicView extends JPanel{
         jpFlowLayout1.add(jlMode);
         jpFlowLayout1.add(jcbMode);
         jpGrid.add(jpFlowLayout1);
-        jpDi.add(jpGrid);
-        //jpShowStatics.add(jpDi);
-        //frame.getContentPane().add(jpShowStatics, BorderLayout.CENTER);
+        jpDi.add(jpGrid, BorderLayout.NORTH);
 
-        //Gràfica
-        Grapic gra = new Grapic();
-        //jpShowStatics.add(gra, BorderLayout.SOUTH);
-        //frame.add(gra);
+        gra = new Grapic( score, 0);
+
+        jbExit = new JButton("Exit");
+
         jpDi.add(gra);
         this.add(jpDi);
+        this.add(jbExit,BorderLayout.PAGE_END);
 
-        /*Grapic g = new Grapic();
-        JFrame frame = new JFrame();
-        frame.add(g);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(550,400);
-        //frame.setBounds(20,20, 500,500);
-        frame.setVisible(true);*/
 
 
 
@@ -82,15 +77,29 @@ public class GraphicView extends JPanel{
 
     public void registerControllerGraphic(Controller controller) {
         jcbMode.addActionListener(controller);
+        jcbMode.setActionCommand("Change_user_userMode");
         jcbUsers.addActionListener(controller);
+        jcbUsers.setActionCommand("Change_user_Player");
+        jbExit.addActionListener(controller);
+        jbExit.setActionCommand("ExitGraphic");
+
     }
 
     public JComboBox getJcbUsers() {
         return jcbUsers;
     }
 
-    public void setJcbUsers(JComboBox jcbUsers) {
-        this.jcbUsers = jcbUsers;
+    public void setJcbUsers(LinkedList<User> users) {
+        if(jcbUsers.getItemCount()!=0){
+           //for(int i = 0; i<jcbUsers.getItemCount(); i++){
+            jcbUsers.removeAllItems();
+           //}
+
+        }
+
+            for (int i = 0; i < users.size(); i++) this.jcbUsers.addItem(users.get(i).getNickname());
+
+
     }
 
     public JComboBox getJcbMode() {
@@ -99,5 +108,15 @@ public class GraphicView extends JPanel{
 
     public void setJcbMode(JComboBox jcbMode) {
         this.jcbMode = jcbMode;
+    }
+
+
+    public void setGra(LinkedList<Score> score, int i) {
+        System.out.println(i + "------>mode");
+       // Grapic gra = new Grapic(score,i);
+        this.gra.setMode(i);
+        this.gra.setScore(score);
+        System.out.println(i + "------>mode");
+        gra.repaint();
     }
 }

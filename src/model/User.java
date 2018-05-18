@@ -283,17 +283,24 @@ public class User implements Serializable{
 
 
 
-    public int recountType(int mode) {
-        int puntuacion = 0;
+    public long recountType(int mode) {
+        long puntuacion = 0;
         for(int i = 0; i< score.size();i++) {
             switch (mode){
                 case 1:
-                    score.get(i).getType().equals("2xGame");
+                    if(score.get(i).getType().equals("2xGame")) {
+                        puntuacion = puntuacion + score.get(i).getPoints();
+                    }
                     break;
                 case 2:
-                    score.get(i).getType().equals("4xGame");
+                    if(score.get(i).getType().equals("4xGame")) {
+                    puntuacion = puntuacion+ score.get(i).getPoints();}
+
+                    break;
                 case 3:
-                    score.get(i).getType().equals("tournament");
+                    if(score.get(i).getType().equals("Tournament")){
+                    puntuacion = puntuacion+ score.get(i).getPoints();}
+                    break;
             }
         }
         return puntuacion;
