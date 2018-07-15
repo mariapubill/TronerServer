@@ -85,6 +85,7 @@ import java.sql.*;
                 return true;
             }
             catch(SQLException ex) {
+                ex.printStackTrace();
                 System.out.println("Problema al connecta-nos a la BBDD --> "+url);
             }
             catch(ClassNotFoundException ex) {

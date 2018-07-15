@@ -136,12 +136,47 @@ public class GestorDB {
                 System.out.println(result);
                 System.out.println("Password Introducido: "+user.getPassword());
                 if(result.equals(user.getPassword())) {
-                    updateLastAccess(user);
-                    return true;
+                    getUserInfo(user);
+                    if(isConnected(user.getNickname())){
+                        return false;
+                    }else{
+                        setConnected(user.getNickname());
+                        return true;
+                    }
                 }
                 return false;
             }
         }else{
+            return false;
+        }
+    }
+
+    private void setConnected(String nickname) {
+        conectorDB.insertQuery("UPDATE usuari SET connected ='"+1+"' WHERE nickname = '"+nickname+"';");
+        System.out.println("UPDATE usuari SET connected ='"+1+"' WHERE nickname = '"+nickname+"';");
+    }
+
+    private boolean isConnected(String nickname) {
+        ResultSet resultSet = conectorDB.selectQuery("SELECT usuari.connected FROM usuari WHERE usuari.nickname like '" +
+                nickname + "';");
+        System.out.println("SELECT usuari.connected FROM usuari WHERE usuari.nickname like '" +
+        nickname + "';");
+
+        try {
+            while (resultSet.next()) {
+                Boolean result = (boolean) resultSet.getObject("connected");
+                System.out.println(result);
+                if(result.equals(1)){
+                    return true;
+                }else{
+                    return false;
+                }
+
+            }
+            return false;
+        } catch (SQLException e) {
+            System.out.println("lol");
+            e.printStackTrace();
             return false;
         }
     }
@@ -290,9 +325,8 @@ public class GestorDB {
      */
     private void chargePoints(User user) {
         LinkedList<Score> scores = new LinkedList<>();
-        ResultSet resultSet =conectorDB.selectQuery("SELECT s.dateScore,s.points,s.timeRound,g.type FROM game as g,score as s,usuari as u WHERE u.nickname = s.nickname AND s.idGame = g.idGame AND s.nickname like '"+user.getNickname()+"';");
-        System.out.println("SELECT s.datePlay,s.points,s.timeRound,g.type FROM game as g,score as s,usuari as u WHERE u.nickname = s.nickname " +
-                "AND s.idGame = g.idGame AND s.nickname like '"+user.getNickname()+"';");
+
+        ResultSet resultSet =conectorDB.selectQuery("SELECT s.dateScore,s.points,s.timeRound,g.type FROM game as g,score as s,usuari as u WHERE u.nickname = s.nickname AND s.idGame = g.idGame AND s.nickname like '"+user.getNickname()+"' order by dateScore ASC,timeRound asc;");
         try {
 
             while(resultSet.next()){
@@ -354,7 +388,12 @@ public class GestorDB {
         conectorDB.insertQuery("UPDATE usuari SET goTurbo ='"+user.getGoTurbo()+"' WHERE nickname = '"+user.getNickname()+"';");
     }
 
- //   public void cleanURL() {
+    public void changeConnected(User user) {
+        conectorDB.updateQuery("UPDATE usuari SET connected = false WHERE nickname ='"+user.getNickname()+"';");
+        System.out.println("UPDATE usuari SET connected = false WHERE nickname ='"+user.getNickname()+"';");
+    }
+
+    //   public void cleanURL() {
  //       conectorDB.cleanURL();
  //   }
 }
