@@ -4,7 +4,8 @@ package controller;
 
 import model.Petition;
 import model.ServerGrid;
-import network.DedicatedServer;
+
+import network.DedicatedServerUser;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -14,21 +15,26 @@ public class AddMovementThread extends Thread {
 
     private GameController c;
     private Petition newGrid;
-    private DedicatedServer server;
+    private DedicatedServerUser server;
     private boolean go;
     private int x,y;
     private ServerGrid sg;
     private int color;
 
-    public AddMovementThread(GameController c, DedicatedServer server, ServerGrid model, Point posicions) {
-        this.c = c;
+
+
+    public AddMovementThread() {
         this.go = false;
+    }
+
+    public void AddMovement(DedicatedServerUser server, ServerGrid model, Point posicions) {
+
+
         this.server = server;
         this.sg = model;
         x= (int) posicions.getX();
         y= (int) posicions.getY();
     }
-
 
     public void setGo(boolean go) {
         this.go = go;
@@ -42,12 +48,15 @@ public class AddMovementThread extends Thread {
     public void run() {
         go = true;
         System.out.println("newThread");
-        while (go) {
+
+        while(go){
+
             try {
+                System.out.println(newGrid.getKey()+"                                    addMovement");
                 Thread.sleep(100);
                 if (newGrid.getKey() == KeyEvent.VK_LEFT){
                     if ((y == 0) || checkPaint(x, y)){
-                        System.out.println("GameOver11111111111");
+
                         go = false;
                         server.stopThreads();
 
@@ -64,7 +73,7 @@ public class AddMovementThread extends Thread {
                 }
                 if (newGrid.getKey() == KeyEvent.VK_RIGHT) {
                     if((y == 119) || checkPaint(x, y)){
-                        System.out.println("GameOver11111");
+
                         server.stopThreads();
 
                     }else {
@@ -80,23 +89,20 @@ public class AddMovementThread extends Thread {
                 if (newGrid.getKey() == KeyEvent.VK_UP){
 
                     if((x == 0) || checkPaint(x, y)){
-                        System.out.println("GameOver11111111");
+
                         server.stopThreads();
                         go = false;
 
                     }else {
                         char [][] aux=  sg.getServerGrid();
                         aux[x--][y]= (char) color;
-
-
-
                         sg.setServerGrid(aux);
                     }
                 }
                 if (newGrid.getKey() == KeyEvent.VK_DOWN){
 
                     if((x == 119) || checkPaint(x, y)){
-                        System.out.println("GameOver11111111111");
+
                         go = false;
                         server.stopThreads();
                     }else {

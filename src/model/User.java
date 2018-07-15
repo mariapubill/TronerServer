@@ -1,3 +1,4 @@
+
 package model;
 
 
@@ -72,7 +73,6 @@ public class User implements Serializable{
      * @param dateRegister
      * @param dateAccess
      */
-
     public User(String nickname,String password,String email,String dateRegister,String dateAccess){
         this.nickname = nickname;
         this.password = password;
@@ -283,24 +283,17 @@ public class User implements Serializable{
 
 
 
-    public long recountType(int mode) {
-        long puntuacion = 0;
+    public int recountType(int mode) {
+        int puntuacion = 0;
         for(int i = 0; i< score.size();i++) {
             switch (mode){
                 case 1:
-                    if(score.get(i).getType().equals("2xGame")) {
-                        puntuacion = puntuacion + score.get(i).getPoints();
-                    }
+                    score.get(i).getType().equals("2xGame");
                     break;
                 case 2:
-                    if(score.get(i).getType().equals("4xGame")) {
-                    puntuacion = puntuacion+ score.get(i).getPoints();}
-
-                    break;
+                    score.get(i).getType().equals("4xGame");
                 case 3:
-                    if(score.get(i).getType().equals("Tournament")){
-                    puntuacion = puntuacion+ score.get(i).getPoints();}
-                    break;
+                    score.get(i).getType().equals("tournament");
             }
         }
         return puntuacion;

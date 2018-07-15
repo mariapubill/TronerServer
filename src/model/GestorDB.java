@@ -113,6 +113,7 @@ public class GestorDB {
         if (userExists(user)) {
             ResultSet resultSet = conectorDB.selectQuery("SELECT usuari.password FROM usuari WHERE usuari.email like '"
                     + user.getEmail() + "' OR usuari.nickname like '" + user.getNickname() + "';");
+
             System.out.println(user.getEmail());
             System.out.println(user.getNickname());
             String result = new String();

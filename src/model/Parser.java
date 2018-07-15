@@ -2,7 +2,6 @@ package model;
 
 //import org.json.JSONException;
 //import org.json.JSONObject;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -60,7 +60,7 @@ public class Parser {
      * @throws NullPointerException
      */
     public void readJsonFile() throws IOException, NullPointerException {
-        File file = new File("data//");
+        File file = new File("data/");
         if (!file.exists()) {
             throw new FileNotFoundException("No se ha encontrado el direcotrio");
         }
@@ -68,7 +68,6 @@ public class Parser {
         boolean exists = false;
         for (int i = 0; i < ficheros.length; i++) {
             File f = new File(ficheros[i].getName());
-            System.out.println(ficheros[i].getName());
             if (ficheros[i].getName().equals("config.json")) {
                 exists = true;
             }
@@ -77,7 +76,7 @@ public class Parser {
             throw new FileNotFoundException("no existe el fichero config.json");
         }
         try {
-            Path path = Paths.get("data//config.json");
+            Path path = Paths.get("data/config.json");
             List<String> s = Files.readAllLines(path);
             String json = new String();
             for (int i = 0; i < s.size();i++){
