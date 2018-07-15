@@ -253,6 +253,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-1" />
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
