@@ -3,7 +3,7 @@ package model;
 import java.awt.*;
 import java.io.Serializable;
 
-
+//al dedicatedServerser li dic model
 /**
  * creem la classe que contindrà la informació que el servidor envia al client
  * servidor --> client
@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class ServerGrid implements Serializable {
     private char[][] serverGrid;
     private Point[] posicions;
-    //private static final long serialVersionUID = 5940092344965987887L;
+    private static final long serialVersionUID = 5940092344965987887L;
 
     public ServerGrid() {
         this.serverGrid = new char[120][120];
